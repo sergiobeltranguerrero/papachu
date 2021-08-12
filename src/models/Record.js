@@ -3,11 +3,11 @@ const { Schema, model } = require('mongoose')
 const recordSchema = new Schema({
   entryTime: Date,
   departureTime: Date,
-  date: Date
-  // user: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User'
-  // }
+  date: Date,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 recordSchema.set('toJSON', {

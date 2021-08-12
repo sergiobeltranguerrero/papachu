@@ -5,6 +5,8 @@ const app = express()
 const cors = require('cors')
 
 const recordRouter = require('./controllers/record')
+const userRouter = require('./controllers/user')
+const loginRouter = require('./controllers/login')
 
 const requestLogger = require('./utils/requestLogger')
 const notFound = require('./utils/notFound')
@@ -14,6 +16,8 @@ app.use(requestLogger)
 app.use(cors())
 
 app.use('/api/record', recordRouter)
+app.use('/api/user', userRouter)
+app.use('/api/login', loginRouter)
 
 app.use(notFound)
 

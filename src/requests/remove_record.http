@@ -1,0 +1,2 @@
+DELETE http://localhost:3001/api/record/6114edf646c15ff0250093fe
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmdpb2JlbHRyYW4iLCJpZCI6IjYxMTRkZWZiOWFiODRlZTViMzdiNjFjNiIsImlhdCI6MTYyODc2NjIyOX0.cXb1IO-w8Fu96h9oCKr4vFsaeg2JFRjr0dqPUcVr1jo
