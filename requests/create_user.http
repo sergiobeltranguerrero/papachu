@@ -1,8 +1,8 @@
-POST http://localhost:3001/api/user
+POST https://papachu-api.herokuapp.com/api/user
 Content-type: application/json
 
 {
-  "username": "pauvilar",
-  "name": "Pau Vilar",
+  "username": "sergiobeltran",
+  "name": "Sergio Beltran",
   "password": "112233aa"
 }
