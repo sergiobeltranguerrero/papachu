@@ -1,0 +1,8 @@
+PUT http://localhost:3001/api/record/6113c2032e685361d01517a3
+Content-Type: application/json
+
+{
+  "entryTime": "2021-08-10 15:00",
+  "departureTime": "2021-08-11 00:30",
+  "date": "2021-08-10"
+}
