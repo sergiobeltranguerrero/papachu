@@ -1,9 +1,9 @@
 POST http://localhost:3001/api/record
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhdXZpbGFyIiwiaWQiOiI2MTE1MDkxNTQzOGVjMGZmYjRjYTNkM2MiLCJpYXQiOjE2Mjg3Njg1NTJ9.sLHJyPrychTTM-TDxkpzfO0J1mo3Z5QUWHkDtldIDfQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmdpb2JlbHRyYW4iLCJpZCI6IjYxMTUxNzM5Y2MyNjZlMDAxNjJlYzA4ZSIsImlhdCI6MTYyOTI4NzcyMn0._1Ua2Dc39fBPK8hGxnhNU1QRjhoOTZSIsCifFCVk90c
 
 {
-  "entryTime": "2021-08-12 16:00",
-  "departureTime": "2021-08-13 00:00",
+  "entryTime": "15:00",
+  "departureTime": "00:00",
   "date": "2021-08-12"
 }
