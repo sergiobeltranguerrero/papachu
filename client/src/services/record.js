@@ -1,10 +1,17 @@
 import axios from 'axios'
 
 const getAll = async () => {
-  const response = await axios.get('/api/record', {
+  return await axios.get('/api/record', {
     headers: { Authorization: `bearer ${localStorage.getItem('library-user-token')}` }
+  }).then((response) => {
+    return response.data
+  }
+  ).catch(error => {
+    if (error.response.status === 401) {
+      return null
+    }
+    return error
   })
-  return response.data
 }
 
 const createNewRecord = async ({ entryTime, departureTime, date }) => {

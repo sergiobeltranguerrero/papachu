@@ -21,10 +21,10 @@ const isValidToken = (req, res) => {
   let decodedToken
   jwt.verify(token, process.env.SECRET, (err, decoded) => {
     if (err) {
-      return res.json({ error: 'invalid token' }).end()
+      return res.status(401).json({ error: 'invalid token' }).end()
     }
     if (!decoded.id) {
-      return res.json({ error: 'invalid token' }).end()
+      return res.status(401).json({ error: 'invalid token' }).end()
     }
     decodedToken = decoded
   })

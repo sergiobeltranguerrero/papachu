@@ -1,10 +1,15 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import Navbar from './Navbar'
 
 const RecordList = () => {
   const records = useSelector(state => state.record)
-  return (
+  const auth = useSelector(state => state.auth)
+
+  if (records && auth.isLoggedIn === true) {
+    return (
     <div>
+      <Navbar/>
       <h2>Registros</h2>
       <table>
         <tr>
@@ -22,9 +27,9 @@ const RecordList = () => {
         </tr>
         )}
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td/>
+          <td/>
+          <td/>
           <td>
             <strong>
               {records.reduce((acc, record) => acc + record.totalHours, 0)}
@@ -33,7 +38,9 @@ const RecordList = () => {
         </tr>
       </table>
     </div>
-  )
+    )
+  }
+  return null
 }
 
 export default RecordList

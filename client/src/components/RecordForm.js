@@ -1,6 +1,7 @@
 import React from 'react'
 import { createRecord } from '../reducers/recordReducer'
 import { useDispatch } from 'react-redux'
+import Navbar from './Navbar'
 
 const RecordForm = () => {
   const dispatch = useDispatch()
@@ -19,6 +20,7 @@ const RecordForm = () => {
 
   return (
     <div>
+      <Navbar/>
       <h2>Crear un nuevo Registro</h2>
       <form onSubmit={handleSubmit}>
         <div>
