@@ -22,15 +22,17 @@ const App = () => {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/login" component={LoginForm}/>
-        <Route path="/logout" component={Logout}/>
-        <ProtectedRoute path="/records" component={RecordList}/>
-        <ProtectedRoute path="/create_record" component={RecordForm}/>
-        <ProtectedRoute path="/" component={Home}/>
-      </Switch>
-    </BrowserRouter>
+    <div className='container'>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/login" component={LoginForm}/>
+          <Route path="/logout" component={Logout}/>
+          <ProtectedRoute path="/records" component={RecordList}/>
+          <ProtectedRoute path="/create_record" component={RecordForm}/>
+          <ProtectedRoute path="/" component={Home}/>
+        </Switch>
+      </BrowserRouter>
+    </div>
   )
 }
 

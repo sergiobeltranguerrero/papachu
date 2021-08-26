@@ -1,7 +1,8 @@
 import React from 'react'
 import { createRecord } from '../reducers/recordReducer'
 import { useDispatch } from 'react-redux'
-import Navbar from './Navbar'
+import NavBar from './NavBar'
+import { Form, Button } from 'react-bootstrap'
 
 const RecordForm = () => {
   const dispatch = useDispatch()
@@ -20,23 +21,27 @@ const RecordForm = () => {
 
   return (
     <div>
-      <Navbar/>
-      <h2>Crear un nuevo Registro</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Día: </label>
-          <input type="date" name="date"/>
-        </div>
-        <div>
-          <label>Hora de entrada: </label>
-          <input type="time" name="entryTime"/>
-        </div>
-        <div>
-          <label>Hora de salida: </label>
-          <input type="time" name="departureTime"/>
-        </div>
-        <button>guardar</button>
-      </form>
+      <NavBar/>
+      <div className="p-4">
+        <h1>Nuevo Registro</h1>
+      </div>
+      <div className="d-inline-flex p-1">
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="date">
+            <Form.Label>Día</Form.Label>
+            <Form.Control type="date" placeholder="Día"/>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="entryTime">
+            <Form.Label>Hora de entrada</Form.Label>
+            <Form.Control type="time" placeholder="Hora de entrada"/>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="departureTime">
+            <Form.Label>Hora de salida</Form.Label>
+            <Form.Control type="time" placeholder="Hora de salida"/>
+          </Form.Group>
+          <Button variant='primary' type='submit'>guardar</Button>
+        </Form>
+      </div>
     </div>
   )
 }

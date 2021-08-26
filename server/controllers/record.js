@@ -1,35 +1,9 @@
 const recordRouter = require('express').Router()
 const Record = require('../models/Record')
 const User = require('../models/User')
-const jwt = require('jsonwebtoken')
-
-const getTokenFrom = req => {
-  const authorization = req.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
-  }
-  return null
-}
-
-const isValidToken = (req, res) => {
-  const token = getTokenFrom(req)
-  if (!token) {
-    return res.status(401).json({
-      error: 'token missing'
-    }).end()
-  }
-  let decodedToken
-  jwt.verify(token, process.env.SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ error: 'invalid token' }).end()
-    }
-    if (!decoded.id) {
-      return res.status(401).json({ error: 'invalid token' }).end()
-    }
-    decodedToken = decoded
-  })
-  return decodedToken
-}
+const RecordByMonth = require('../models/RecordByMonth')
+const isValidToken = require('../utils/helpers')
+const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
 const isValidHour = (input) => {
   return /([01]?[0-9]|2[0-3]):[0-5][0-9]?$/.test(input)
@@ -55,6 +29,7 @@ recordRouter.get('/', async (req, res, next) => {
 
     const user = await User.findById(decodedToken.id)
     const records = await Record.find({ user })
+      .populate('user', 'username')
     res.status(200).json(records)
   } catch (e) {
     next(e)
@@ -68,6 +43,20 @@ recordRouter.post('/', async (req, res, next) => {
     const decodedToken = isValidToken(req, res)
     if (!decodedToken.id) return
     const user = await User.findById(decodedToken.id)
+
+    const date2 = new Date(date)
+    const month = date2.getMonth() + 1
+    const year = date2.getFullYear()
+    let recordByMonth = await RecordByMonth.findOne({ user, numberMonth: month, year })
+    if (!recordByMonth) {
+      await new RecordByMonth({
+        month: monthNames[month - 1],
+        numberMonth: month,
+        year,
+        user
+      }).save()
+      recordByMonth = await RecordByMonth.findOne({ user, numberMonth: month, year })
+    }
 
     if (!entryTime || !departureTime || !date) {
       return res
@@ -92,8 +81,11 @@ recordRouter.post('/', async (req, res, next) => {
       date,
       user: user._id
     })
-
     const savedRecord = await record.save()
+
+    recordByMonth.records = recordByMonth.records.concat(savedRecord._id)
+    await recordByMonth.save()
+
     res.json(savedRecord)
   } catch (e) {
     next(e)
