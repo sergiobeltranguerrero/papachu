@@ -26,4 +26,11 @@ const createNewRecord = async ({ entryTime, departureTime, date }) => {
   return response.data
 }
 
-export default { getAll, createNewRecord }
+const deleteRecord = async (id) => {
+  const response = await axios.delete(`/api/record/${id}`, {
+    headers: { Authorization: `bearer ${localStorage.getItem('library-user-token')}` }
+  })
+  return response.data
+}
+
+export default { getAll, createNewRecord, deleteRecord }

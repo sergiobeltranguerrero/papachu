@@ -26,7 +26,9 @@ const NavBar = () => {
           <LinkContainer to='/records'>
             <Nav.Link>Registros</Nav.Link>
           </LinkContainer>
-          <Nav.Link>Listado por meses</Nav.Link>
+          <LinkContainer to='/months'>
+            <Nav.Link>Listado por meses</Nav.Link>
+          </LinkContainer>
           <LinkContainer to='/logout'>
             <Nav.Link><Button variant='danger'>Cerrar Sesión</Button></Nav.Link>
           </LinkContainer>

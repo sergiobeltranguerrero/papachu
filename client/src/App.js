@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux'
 import React, { useEffect } from 'react'
 import { initializeRecord } from './reducers/recordReducer'
+import { initialzeMonths } from './reducers/recordByMonthReducer'
 import RecordList from './components/RecordList'
 import RecordForm from './components/RecordForm'
 import LoginForm from './components/LoginForm'
@@ -8,12 +9,13 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Home from './components/Home'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { logout } from './reducers/loginReducer'
-
+import MonthsList from './components/MonthsList'
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(initializeRecord())
+    dispatch(initialzeMonths(2021))
   }, [dispatch])
 
   const Logout = () => {
@@ -29,6 +31,7 @@ const App = () => {
           <Route path="/logout" component={Logout}/>
           <ProtectedRoute path="/records" component={RecordList}/>
           <ProtectedRoute path="/create_record" component={RecordForm}/>
+          <ProtectedRoute path="/months" component={MonthsList}/>
           <ProtectedRoute path="/" component={Home}/>
         </Switch>
       </BrowserRouter>

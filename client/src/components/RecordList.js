@@ -1,11 +1,17 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import NavBar from './NavBar'
 import { Button, Table } from 'react-bootstrap'
+import { deleteRecord } from '../reducers/recordReducer'
 
 const RecordList = () => {
   const records = useSelector(state => state.record)
   const auth = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+
+  const handleDelete = (id) => {
+    dispatch(deleteRecord(id))
+  }
 
   if (records && auth.isLoggedIn === true) {
     return (
@@ -40,7 +46,7 @@ const RecordList = () => {
                   </svg>
                 </Button>
                 {' '}
-                <Button variant="danger">
+                <Button variant="danger" onClick={() => handleDelete(record.id)}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                        className="bi bi-trash" viewBox="0 0 16 16">
                     <path
