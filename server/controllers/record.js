@@ -98,10 +98,18 @@ recordRouter.delete('/:id', async (request, response, next) => {
 
   try {
     const { id } = request.params
+    const record = await Record.findById(id)
     const res = await Record.findByIdAndDelete(id)
+    const recordByMonth = await RecordByMonth.findOne({ records: record })
+
     if (res === null) {
       return response.status(404).end()
     }
+    const recordByMonthUpdated = {
+      records: recordByMonth.records.filter(item => item.toString() !== id.toString()),
+      totalHours: recordByMonth.totalHours - record.totalHours
+    }
+    await RecordByMonth.findByIdAndUpdate(recordByMonth.id, recordByMonthUpdated)
     response.status(204).end()
   } catch (e) {
     next(e)
@@ -114,8 +122,10 @@ recordRouter.put('/:id', async (request, response, next) => {
 
   const user = await User.findById(decodedToken.id)
   const { id } = request.params
-  const { entryTime, departureTime, date } = request.body
-  if (!entryTime || !departureTime || !date) {
+  const { entryTime, departureTime } = request.body
+  const record = await Record.findById(id)
+
+  if (!entryTime || !departureTime) {
     return response
       .status(400)
       .json({
@@ -136,10 +146,15 @@ recordRouter.put('/:id', async (request, response, next) => {
     entryTime,
     departureTime,
     totalHours: getTotalHours(entryTime, departureTime),
-    date,
     user: user._id
   }
   try {
+    const recordByMonth = await RecordByMonth.findOne({ records: record })
+    const recordByMonthUpdated = {
+      totalHours: (recordByMonth.totalHours - record.totalHours) + updatedRecord.totalHours
+    }
+    await RecordByMonth.findByIdAndUpdate(recordByMonth.id, recordByMonthUpdated)
+
     Record.findByIdAndUpdate(id, updatedRecord, { new: true })
       .then(result => response.json(result))
   } catch (e) {

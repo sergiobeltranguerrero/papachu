@@ -11,10 +11,6 @@ const recordSchema = new Schema({
   }
 })
 
-recordSchema.pre('findOneAndDelete', async function () {
-  console.log(await this)
-})
-
 recordSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()

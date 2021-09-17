@@ -34,14 +34,5 @@ RecordByMonthSchema.pre('save', async function () {
   this.totalHours = accumulator
 })
 
-RecordByMonthSchema.pre('findOneAndRemove', async function () {
-  let accumulator = 0
-  console.log(this)
-  for (let i = 0; i < this.records.length; i++) {
-    const record = await Record.findById(this.records[i])
-    accumulator += record.totalHours
-  }
-  this.totalHours = accumulator
-})
 const RecordByMonth = model('RecordByMonth', RecordByMonthSchema)
 module.exports = RecordByMonth

@@ -1,8 +1,8 @@
-PUT http://localhost:3001/api/record/6113c2032e685361d01517a3
+PUT http://localhost:3001/api/record/61444e1c13b1478960536a77
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmdpb2JlbHRyYW4iLCJpZCI6IjYxMTUxNzM5Y2MyNjZlMDAxNjJlYzA4ZSIsImlhdCI6MTYyOTI4NzcyMn0._1Ua2Dc39fBPK8hGxnhNU1QRjhoOTZSIsCifFCVk90c
 Content-Type: application/json
 
 {
-  "entryTime": "2021-08-10 15:00",
-  "departureTime": "2021-08-11 00:30",
-  "date": "2021-08-10"
+  "entryTime": "20:00",
+  "departureTime": "00:00"
 }
