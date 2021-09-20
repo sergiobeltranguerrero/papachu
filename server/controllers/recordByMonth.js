@@ -33,8 +33,10 @@ recordByMonthRouter.get('/:year', async (req, res, next) => {
     if (!decodedToken.id) return
     const year = req.params.year
     const user = await User.findById(decodedToken.id)
-    const registers = await RecordByMonth.find({ user, year })
-    res.status(200).json(registers)
+    const records = await RecordByMonth.find({ user, year })
+      .populate('user', { username: 1, name: 1 })
+      .populate('records', { entryTime: 1, departureTime: 1, totalHours: 1, date: 1 })
+    res.status(200).json(records)
   } catch (e) {
     next(e)
   }
