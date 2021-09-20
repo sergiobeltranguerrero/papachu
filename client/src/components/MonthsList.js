@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import NavBar from './NavBar'
-import { Table } from 'react-bootstrap'
+import { Table, Nav } from 'react-bootstrap'
 import { initialzeMonths } from '../reducers/recordByMonthReducer'
+import { LinkContainer } from 'react-router-bootstrap'
 
 const MonthsList = () => {
   const dispatch = useDispatch()
@@ -32,7 +33,9 @@ const MonthsList = () => {
           <tbody>
           {months.map(month =>
             <tr key={month.id}>
-              <td>{month.month}</td>
+              <td><LinkContainer to=''>
+                <Nav.Link>{month.month}</Nav.Link>
+              </LinkContainer></td>
               <td>{month.totalHours}</td>
               <td>{month.salary}</td>
             </tr>)}

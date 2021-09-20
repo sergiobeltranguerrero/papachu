@@ -10,6 +10,8 @@ import Home from './components/Home'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { logout } from './reducers/loginReducer'
 import MonthsList from './components/MonthsList'
+import Month from './components/Month'
+
 const App = () => {
   const dispatch = useDispatch()
 
@@ -24,7 +26,7 @@ const App = () => {
   }
 
   return (
-    <div className='container'>
+    <div className="container">
       <BrowserRouter>
         <Switch>
           <Route exact path="/login" component={LoginForm}/>
@@ -32,6 +34,7 @@ const App = () => {
           <ProtectedRoute path="/records" component={RecordList}/>
           <ProtectedRoute path="/create_record" component={RecordForm}/>
           <ProtectedRoute path="/months" component={MonthsList}/>
+          <ProtectedRoute path="/:year/:monthName" component={Month}/>
           <ProtectedRoute path="/" component={Home}/>
         </Switch>
       </BrowserRouter>
