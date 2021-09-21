@@ -12,7 +12,6 @@ const reducer = (state = [], action) => {
 export const initialzeMonths = (year) => {
   return async dispatch => {
     const months = await recordByMonthService.getAll(year)
-    console.log(months)
     dispatch({
       type: 'INIT_MONTHS',
       data: months

@@ -33,4 +33,15 @@ const deleteRecord = async (id) => {
   return response.data
 }
 
-export default { getAll, createNewRecord, deleteRecord }
+const editRecord = async ({ entryTime, deleteRecord, id }) => {
+  const updatedRecord = {
+    entryTime,
+    deleteRecord
+  }
+  const response = await axios.put(`/api/record/${id}`, updatedRecord, {
+    headers: { Authorization: `bearer ${localStorage.getItem('library-user-token')}` }
+  })
+  return response.data
+}
+
+export default { getAll, createNewRecord, deleteRecord, editRecord }

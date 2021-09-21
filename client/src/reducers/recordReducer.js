@@ -8,6 +8,8 @@ const reducer = (state = [], action) => {
       return state.concat(action.data)
     case 'REMOVE_RECORD':
       return state.filter(record => record.id !== action.data)
+    case 'EDIT_RECORD':
+      return state.filter(record => record.id === action.data.id ? action.data : record)
     default:
       return state
   }
@@ -39,6 +41,16 @@ export const deleteRecord = (content) => {
     dispatch({
       type: 'REMOVE_RECORD',
       data: content
+    })
+  }
+}
+
+export const updatedRecord = (content) => {
+  return async dispatch => {
+    const data = recordService.editRecord(content)
+    dispatch({
+      type: 'UPDATE_RECORD',
+      data
     })
   }
 }

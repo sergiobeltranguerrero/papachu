@@ -33,7 +33,7 @@ const MonthsList = () => {
           <tbody>
           {months.map(month =>
             <tr key={month.id}>
-              <td><LinkContainer to=''>
+              <td><LinkContainer to={`/2021/${month.month}`}>
                 <Nav.Link>{month.month}</Nav.Link>
               </LinkContainer></td>
               <td>{month.totalHours}</td>

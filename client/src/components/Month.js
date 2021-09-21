@@ -9,8 +9,6 @@ const Month = () => {
   const months = useSelector(state => state.months)
   const auth = useSelector(state => state.auth)
 
-  console.log(monthName)
-
   const month = months.find(month => month.month === monthName)
 
   if (month && auth.isLoggedIn === true) {

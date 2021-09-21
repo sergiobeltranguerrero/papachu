@@ -156,6 +156,7 @@ recordRouter.put('/:id', async (request, response, next) => {
     await RecordByMonth.findByIdAndUpdate(recordByMonth.id, recordByMonthUpdated)
 
     Record.findByIdAndUpdate(id, updatedRecord, { new: true })
+      .populate('user', 'username')
       .then(result => response.json(result))
   } catch (e) {
     next(e)
