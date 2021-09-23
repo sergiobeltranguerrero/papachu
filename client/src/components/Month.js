@@ -1,15 +1,24 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import NavBar from './NavBar'
 import { Button, Table } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap'
+import { deleteRecord } from '../reducers/recordReducer'
+import { initialzeMonths } from '../reducers/recordByMonthReducer'
 
 const Month = () => {
   const { monthName } = useParams()
   const months = useSelector(state => state.months)
   const auth = useSelector(state => state.auth)
+  const dispatch = useDispatch()
 
   const month = months.find(month => month.month === monthName)
+
+  const handleDelete = (id) => {
+    dispatch(deleteRecord(id))
+    dispatch(initialzeMonths(2021))
+  }
 
   if (month && auth.isLoggedIn === true) {
     return (
@@ -36,15 +45,17 @@ const Month = () => {
               <td>{record.departureTime}</td>
               <td><strong>{record.totalHours}</strong></td>
               <td className="text-center">
-                <Button variant="warning">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                       className="bi bi-pencil" viewBox="0 0 16 16">
-                    <path
-                      d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-                  </svg>
-                </Button>
+                <LinkContainer to={`/edit/${record.id}`}>
+                  <Button variant="warning">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         className="bi bi-pencil" viewBox="0 0 16 16">
+                      <path
+                        d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                    </svg>
+                  </Button>
+                </LinkContainer>
                 {' '}
-                <Button variant="danger">
+                <Button variant="danger" onClick={() => handleDelete(record.id)}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                        className="bi bi-trash" viewBox="0 0 16 16">
                     <path

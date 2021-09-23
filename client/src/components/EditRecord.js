@@ -36,15 +36,15 @@ const EditRecord = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="date">
               <Form.Label>Día</Form.Label>
-              <Form.Control type="text" placeholder="Día" value={record.date} disabled/>
+              <Form.Control type="text" value={record.date} disabled/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="entryTime">
               <Form.Label>Hora de entrada</Form.Label>
-              <Form.Control type="time" placeholder="Hora de entrada"/>
+              <Form.Control type="time" defaultValue={record.entryTime}/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="departureTime">
               <Form.Label>Hora de salida</Form.Label>
-              <Form.Control type="time" placeholder="Hora de salida"/>
+              <Form.Control type="time" defaultValue={record.departureTime}/>
             </Form.Group>
             <Button variant='primary' type='submit'>actualizar</Button>
           </Form>
