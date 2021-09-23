@@ -17,7 +17,8 @@ const EditRecord = () => {
     event.preventDefault()
     const content = {
       entryTime: event.target.entryTime.value,
-      departureTime: event.target.departureTime.value
+      departureTime: event.target.departureTime.value,
+      id
     }
     event.target.entryTime.value = ''
     event.target.departureTime.value = ''

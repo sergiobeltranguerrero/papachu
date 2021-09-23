@@ -33,10 +33,10 @@ const deleteRecord = async (id) => {
   return response.data
 }
 
-const editRecord = async ({ entryTime, deleteRecord, id }) => {
+const editRecord = async ({ entryTime, departureTime, id }) => {
   const updatedRecord = {
     entryTime,
-    deleteRecord
+    departureTime
   }
   const response = await axios.put(`/api/record/${id}`, updatedRecord, {
     headers: { Authorization: `bearer ${localStorage.getItem('library-user-token')}` }
