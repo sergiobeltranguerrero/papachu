@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import NavBar from './NavBar'
 import { Button, Form } from 'react-bootstrap'
@@ -10,6 +10,7 @@ const EditRecord = () => {
   const records = useSelector(state => state.record)
   const auth = useSelector(state => state.auth)
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const record = records.find(record => record.id === id)
 
@@ -23,6 +24,7 @@ const EditRecord = () => {
     event.target.entryTime.value = ''
     event.target.departureTime.value = ''
     dispatch(updatedRecord(content))
+    history.goBack()
   }
 
   if (record && auth.isLoggedIn === true) {
@@ -46,7 +48,7 @@ const EditRecord = () => {
               <Form.Label>Hora de salida</Form.Label>
               <Form.Control type="time" defaultValue={record.departureTime}/>
             </Form.Group>
-            <Button variant='primary' type='submit'>actualizar</Button>
+            <Button variant='primary' type='submit'>actualizar y volver</Button>
           </Form>
         </div>
       </div>

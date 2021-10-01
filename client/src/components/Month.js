@@ -13,7 +13,21 @@ const Month = () => {
   const auth = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
+  // dispatch(initialzeMonths(2021))
+
   const month = months.find(month => month.month === monthName)
+
+  const sortMonth = month.records.map(record => {
+    const splitDate = record.date.split('/')
+    return {
+      date: new Date(splitDate[2], splitDate[1] - 1, splitDate[0]),
+      entryTime: record.entryTime,
+      departureTime: record.departureTime,
+      totalHours: record.totalHours,
+      id: record.id
+    }
+  }).sort((a, b) => a.date - b.date)
+  console.log(sortMonth)
 
   const handleDelete = (id) => {
     dispatch(deleteRecord(id))
@@ -38,9 +52,9 @@ const Month = () => {
           </tr>
           </thead>
           <tbody>
-          {month.records.map(record =>
+          {sortMonth.map(record =>
             <tr key={record.id}>
-              <td>{record.date}</td>
+              <td>{record.date.toLocaleDateString('en-GB')}</td>
               <td>{record.entryTime}</td>
               <td>{record.departureTime}</td>
               <td><strong>{record.totalHours}</strong></td>
